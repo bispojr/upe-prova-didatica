@@ -427,10 +427,7 @@
 		\begin{frame}[fragile]{Estruturas de controle}
 			\begin{block}{Laço}
 				\begin{itemize}
-					\item Duas variações: teste no início ou no fim; \pause
-					\item Em C, é chamado de {\bf while}; \pause
-					\item O comando {\bf for} é uma variação bastante utilizada; \pause
-					\item Comandos de desvios podem ser utilizados.
+					\item Duas variações: teste no início ou no fim.
 				\end{itemize}
 \begin{lstlisting}[style=C++]
 	while(a > b){
@@ -480,11 +477,35 @@
 			\end{block} 
 		\end{frame}
 		
-		\begin{frame}{Entrada e Saída}
-			\begin{block}{Necessidades}
+		\begin{frame}[fragile]{Entrada e Saída}
+			\begin{block}{Deveres}
 				\begin{itemize}
-					\item Recuperação de dados de uma fonte; \pause
-					\item Armazenamento de dados em um destino; \pause
+					\item Recuperação de dados de uma fonte;
+					\item Armazenamento de dados em um destino;
+				\end{itemize}
+\begin{lstlisting}[style=C++]
+	#include <iostream>
+	using namespace std;
+	
+	int a;
+	int b;
+	
+	cout << "Digite o valor de 'a': ";
+	cin >> a;
+	cout << "Digite o valor de 'b': ";
+	cin >> b;
+	
+	cout << "a + b = " << a + b;
+\end{lstlisting}
+			\end{block} \pause
+			\begin{alertblock}{Teclado como arquivo?}
+				Isto é irrelevante para o computador.
+			\end{alertblock}
+		\end{frame}
+	
+		\begin{frame}{Entrada e Saída}
+			\begin{block}{Nomenclatura}
+				\begin{itemize}
 					\item As fontes e os destinos são denominados arquivos: \pause
 					\begin{itemize}
 						\item Teclado; \pause
