@@ -161,7 +161,7 @@
 			\end{itemize}
 		\end{block} \pause
 		\begin{exampleblock}{Aula de hoje...}
-			Paradigma Imperativo
+			Paradigma Imperativo (Linguagem de exemplo: C++)
 		\end{exampleblock}
 	\end{frame}
 
@@ -283,7 +283,7 @@
 			\begin{block}{Características Atuais}
 				Além de ser completa quanto a Turing, a linguagem necessita ter
 				\begin{itemize}
-					\item Expressões e atribuição; \pause
+					\item Expressões de atribuição; \pause
 					\item Estruturas de controle; \pause
 					\item Entrada/saída; \pause
 					\item Manipulação de exceções e erros; \pause
@@ -298,7 +298,7 @@
 		\begin{frame}{Características do Paradigma}
 			\begin{block}{Características}
 				\begin{itemize}
-					\item Expressões e atribuição;
+					\item Expressões de atribuição;
 					\item {\color{gray} Estruturas de controle;
 					\item Entrada/saída; 
 					\item Manipulação de exceções e erros; 
@@ -347,7 +347,7 @@
 		\begin{frame}{Características do Paradigma}
 			\begin{block}{Características}
 				\begin{itemize}
-					\item {\color{gray} Expressões e atribuição;}
+					\item {\color{gray} Expressões de atribuição;}
 					\item Estruturas de controle;
 						\item {\color{gray} Entrada/saída; 
 						\item Manipulação de exceções e erros; 
@@ -467,7 +467,7 @@
 		\begin{frame}{Características do Paradigma}
 			\begin{block}{Características}
 				\begin{itemize}
-					\item {\color{gray} Expressões e atribuição;
+					\item {\color{gray} Expressões de atribuição;
 					\item Estruturas de controle;}
 					\item Entrada/saída; 
 						\item {\color{gray} Manipulação de exceções e erros; 
@@ -482,7 +482,7 @@
 				\begin{itemize}
 					\item Recuperação de dados de uma fonte;
 					\item Armazenamento de dados em um destino;
-				\end{itemize}
+				\end{itemize} \pause
 \begin{lstlisting}[style=C++]
 	#include <iostream>
 	using namespace std;
@@ -497,10 +497,7 @@
 	
 	cout << "a + b = " << a + b;
 \end{lstlisting}
-			\end{block} \pause
-			\begin{alertblock}{Teclado como arquivo?}
-				Isto é irrelevante para o computador.
-			\end{alertblock}
+			\end{block}
 		\end{frame}
 	
 		\begin{frame}{Entrada e Saída}
@@ -523,7 +520,7 @@
 		\begin{frame}{Características do Paradigma}
 			\begin{block}{Características}
 				\begin{itemize}
-					\item {\color{gray} Expressões e atribuição;
+					\item {\color{gray} Expressões de atribuição;
 						\item Estruturas de controle;
 					\item Entrada/saída; }
 					\item Manipulação de exceções e erros; 
@@ -559,7 +556,7 @@
 		\begin{frame}{Características do Paradigma}
 			\begin{block}{Características}
 				\begin{itemize}
-					\item {\color{gray} Expressões e atribuição;
+					\item {\color{gray} Expressões de atribuição;
 						\item Estruturas de controle;
 						\item Entrada/saída; 
 					\item Manipulação de exceções e erros}; 
@@ -569,7 +566,27 @@
 			\end{block} 
 		\end{frame}
 	
-		\begin{frame}{Abstração Procedural}
+			\begin{frame}{Refinamento de Passos}
+			\begin{columns}
+				\column{.4\textwidth}  		
+				\begin{center}
+					\includegraphics[height=.7\textheight]{images/wirth}
+				\end{center}
+				\column{.6\textwidth}  		
+				\begin{block}{Ideia}
+					\begin{center}
+						{\large A construção de programas consiste de uma sequência de refinamento de passos.}
+					\end{center}
+				\end{block}		  		
+				\begin{block}{Quem?}
+					\begin{center}
+						Niklaus Wirth (1973)
+					\end{center}
+				\end{block}
+			\end{columns}
+		\end{frame}
+		
+		\begin{frame}[fragile]{Abstração Procedural}
 			\begin{block}{Necessidades}
 				\begin{itemize}
 					\item Programador foca: \pause
@@ -577,23 +594,23 @@
 						\item na interface da função; \pause
 						\item no seu valor de retorno.
 					\end{itemize} \pause
-					\item Refinamento de passos (Wirth, 1973): \pause
-					\begin{itemize}
-						\item sequenciamento;
-						\item iteração;
-						\item seleção.
-					\end{itemize}
 				\end{itemize}
-			\end{block} \pause
-			\begin{alertblock}{Exemplo: Algoritmo de Ordenação}
-				 Ignora detalhes sobre como essa ordenação é executada.
-			\end{alertblock}
+\begin{lstlisting}[style=C++]
+	#include <algorithm>    // std::sort
+	#include <vector>       // std::vector
+	
+	int colecao[] = {32,71,12,45,26,80,53,33};
+	std::vector<int> meuVetor (colecao, colecao+8);
+	
+	std::sort (meuVetor.begin(), meuVetor.begin()+4);           //(12 32 45 71)26 80 53 33
+\end{lstlisting}
+			\end{block} 
 		\end{frame}
 		
 		\begin{frame}{Características do Paradigma}
 			\begin{block}{Características}
 				\begin{itemize}
-					\item {\color{gray} Expressões e atribuição;
+					\item {\color{gray} Expressões de atribuição;
 						\item Estruturas de controle;
 						\item Entrada/saída; 
 						\item Manipulação de exceções e erros; 
@@ -621,7 +638,7 @@
 			\end{block}
 		\end{frame}
 	
-		\subsection{Potencialidades e Fragilidades}
+		\subsection{Potencialidades e Fragilidades (C++)}
 		
 		\begin{frame}{Potencialidades}
 			\begin{block}{Pontos fortes}
@@ -643,17 +660,13 @@
 			\begin{block}{Limitações da Decomposição Funcional}
 				\begin{itemize}
 					\item Muitas aplicações não são bem servidas neste paradigma; \pause
-					\item Programação de GUIs e dispositivos embarcados; \pause
-					\item Outra abordagem: troca de mensagens entre objetos; \pause
-					\item Programação de GUIs:
-					\begin{itemize}
-						\item  coleção de diferentes tipos de
-						objetos ? botões, áreas de texto, imagens, videoclipes e menus desdobráveis
-						?, cada um comunicando-se com o programa e com o usuário, mandando e
-						recebendo mensagens. \pause
-						\item ``inventam a roda''. 
-					\end{itemize} \pause
-					\item Diálogo entre os {\it stakeholders}.
+					\item Exemplo: Programação de GUIs; \pause
+						\begin{itemize}
+							\item Outra abordagem: troca de mensagens entre objetos; \pause
+							\item Coleção de Objetos: botões, áreas de texto, imagens, videoclipes, menus desdobráveis. \pause
+						\end{itemize}
+					\item Diálogo entre os {\it stakeholders}; \pause
+					\item Separação de interesses pode ser difícil.
 				\end{itemize}
 			\end{block}
 		\end{frame}
