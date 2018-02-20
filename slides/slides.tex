@@ -1,0 +1,540 @@
+\documentclass[xcolor=dvipsnames,table]{beamer}
+%o
+%e
+
+\usepackage{latexsym}
+\usepackage [ansinew]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amssymb} %Este e o AMS paquete
+\usepackage{amsmath}
+\usepackage{stmaryrd}
+\usepackage{fancybox}
+\usepackage{datetime}
+
+\usepackage[T1]{fontenc}
+
+%\usepackage{beamerthemesplit}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{url}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{acronym}
+\usepackage{array}
+\usepackage{amsmath}
+
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\newtheorem{definicao}{Definio}
+\newcommand{\tab}{\hspace*{2em}}
+
+\mode<presentation>
+{
+  %\definecolor{colortexto}{RGB}{153,100,0}
+  \definecolor{colortexto}{RGB}{0,0,0}
+  
+% \setbeamersize{sidebar width left=0.5cm}
+  \setbeamertemplate{background canvas}[vertical shading][ bottom=white!10,top=white!10]
+%   \setbeamercolor{title}{fg=colortitulo!80!black,bg=blue!20!white}
+%   \setbeamercolor{title}{bg=colortitulo!20!black}
+%   \setbeamercolor{background canvas}{bg=colortitulo}
+%   \setbeamercolor{frametitle}{fg=red}
+
+  \setbeamercolor{normal text}{fg=colortexto} 
+
+  \usetheme{Warsaw}
+  %\logo{\includegraphics[width=2cm]{Images/ratonfuerte.jpg}}
+
+
+%   \usefonttheme[onlysmall]{structurebold}
+%   \usecolortheme{seahorse}
+%  \usecolortheme[named={YellowOrange}]{structure}
+%   \usecolortheme[named={brown}]{structure}
+%   \usecolortheme{crane}
+%   \useoutertheme{default}
+}
+
+\title{Programação Imperativa} 
+
+\author{
+  Esdras Lins Bispo Jr. \\ \url{bispojr@ufg.br}
+  } 
+ \institute{
+  Concurso para Professor de Carreira do Magistério Superior
+  \\Bacharelado em Sistemas de Informação
+	\\UPE - Campus Caruaru}
+\date{\textbf{20 de fevereiro de 2018} }
+
+\logo{\includegraphics[width=1cm]{images/upe-logo.jpg}}
+
+\begin{document}
+
+	\begin{frame}
+		\titlepage
+	\end{frame}
+
+	\AtBeginSection{
+		\begin{frame}{Sumário}%[allowframebreaks]{Sumário}
+    		%\tableofcontents[currentsection]
+    		\tableofcontents[currentsection, hideothersubsections]
+		\end{frame}
+	}
+
+	\begin{frame}{Plano de Aula}
+		\tableofcontents
+		%\tableofcontents[hideallsubsections]
+	\end{frame}
+	
+%------------------------------------------
+	\section{Motivação}
+	\begin{frame}{O que você está vendo?}
+		\begin{center}
+			\includegraphics[height=.7\textheight]{images/calice}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}{O que você está vendo?}
+		\begin{center}
+			\includegraphics[height=.7\textheight]{images/rosto}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}{O que você está vendo?}
+		\begin{center}
+			\includegraphics[height=.7\textheight]{images/velhinhos}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}{O que é um paradigma?}
+		\begin{block}{Paradigma}
+			Um {\bf padrão de pensamento} que guia \\um conjunto de atividades relacionadas.
+		\end{block} \pause
+		\begin{block}{Paradigma de Programação}
+			Um {\bf padrão de resolução de problemas} que se relaciona a um determinado gênero de programas e linguagens.
+		\end{block} 
+	\end{frame}
+
+	\begin{frame}{Dúvida Comum...}
+		\begin{alertblock}{Pergunta}
+			Qual é a melhor linguagem?
+		\end{alertblock} \pause
+		\begin{exampleblock}{Resposta}
+			Para qual tipo de problema?
+		\end{exampleblock} \pause
+		\begin{block}{Tome nota...}
+			A natureza do problema apontará \\para qual linguagem devemos utilizar.
+		\end{block}
+	\end{frame}
+
+	\begin{frame}{O que é um paradigma?}
+		\begin{block}{Alguns Paradigmas de Programação...}
+			\begin{itemize}
+				\item Programação imperativa
+				\item Programação orientada a objeto
+				\item Programação funcional
+				\item Programação lógica
+			\end{itemize}
+		\end{block} \pause
+		\begin{exampleblock}{Aula de hoje...}
+			Paradigma Imperativo
+		\end{exampleblock}
+	\end{frame}
+
+	\section{Paradigma Imperativo}
+		\subsection{Breve Histórico do Paradigma}
+		
+		\begin{frame}{Programa Armazenado}
+			\begin{columns}
+				\column{.5\textwidth}  		
+				\begin{center}
+					\includegraphics[height=.7\textheight]{images/neumann}
+				\end{center}
+				\column{.5\textwidth}  		
+				\begin{block}{Ideia}
+					\begin{center}
+						{\large Um programa e seus dados podem residir na memória principal de um computador.}
+					\end{center}
+				\end{block}		  		
+				\begin{block}{Quem?}
+					\begin{center}
+						John von Neumann (1940)
+					\end{center}
+				\end{block}
+			\end{columns}
+		\end{frame}
+	
+		\begin{frame}{Programa Armazenado}
+			\begin{columns}
+				\column{.5\textwidth}  		
+				\begin{center}
+					\includegraphics[height=.7\textheight]{images/turing}
+				\end{center}
+				\column{.5\textwidth}  		
+				\begin{block}{Ideia}
+					\begin{center}
+						{\large É possível simular uma máquina de Turing em uma outra máquina de Turing.}
+					\end{center}
+				\end{block}		  		
+				\begin{block}{Quem?}
+					\begin{center}
+						Alan Turing (1936)
+					\end{center}
+				\end{block}
+			\end{columns}
+		\end{frame}
+	
+		\begin{frame}{Um outro tipo de programação}
+			\begin{center}
+				\includegraphics[height=.7\textheight]{images/jumper}
+			\end{center}
+		\end{frame}
+	
+		\begin{frame}{Um outro tipo de programação}
+			\begin{center}
+				\includegraphics[height=.6\textheight]{images/porta-and}
+			\end{center}
+		\end{frame}
+	
+		\begin{frame}{Calculadora Simples}
+			\begin{center}
+				\includegraphics[height=.7\textheight]{images/calc}
+			\end{center}
+		\end{frame}
+		
+		\begin{frame}{Modelo de Neumann-Eckert}
+			\begin{center}
+				\includegraphics[height=.6\textheight]{images/modelo-neumann}
+			\end{center}
+		\end{frame}
+	
+		\begin{frame}{Modelo de Neumann-Eckert}
+			\begin{block}{Características}
+				\begin{itemize}
+					\item Contém tanto instruções quanto dados; \pause
+					\item Armazenamento de programa: instruções; \pause
+						\begin{itemize}
+							\item Instruções de atribuição; \pause
+							\item Instruções condicionais; \pause
+							\item Instruções de ramificação. \pause
+							\item Linguagem ``completa quanto a Turing''. \pause
+						\end{itemize}
+					\item Armazenamento de dados: valores de dados; \pause
+					\item Atribuição:  \pause
+						\begin{itemize}
+							\item alterar o valor de um local de memória; \pause
+							\item destruindo o valor anterior.
+						\end{itemize}
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+	
+		\begin{frame}{Exemplo: Diagrama de fluxo}
+			\begin{center}
+				\includegraphics[height=.8\textheight]{images/fibonacci}
+			\end{center}
+		\end{frame}
+	
+		\begin{frame}{Problemas com {\it goto}}
+			\begin{columns}
+				\column{.5\textwidth}  		
+				\begin{center}
+					\includegraphics[height=.7\textheight]{images/dijkstra}
+				\end{center}
+				\column{.5\textwidth}  		
+				\begin{block}{Ideia}
+					\begin{center}
+						{\large O uso excessivo de comandos de ramificação (ou ``{\it go to}'') é prejudicial ao processo de desenvolvimento de programas confiáveis.}
+					\end{center}
+				\end{block}		  		
+				\begin{block}{Quem?}
+					\begin{center}
+						Edsger Dijkstra (1968)
+					\end{center}
+				\end{block}
+			\end{columns}
+		\end{frame}
+	
+		\begin{frame}{Consequência da Evolução do Paradigma}
+			\begin{block}{Características Atuais}
+				Além de ser completa quanto a Turing, a linguagem necessita ter
+				\begin{itemize}
+					\item Expressões e atribuição; \pause
+					\item Estruturas de controle; \pause
+					\item Entrada/saída; \pause
+					\item Manipulação de exceções e erros; \pause
+					\item Abstração procedural; \pause
+					\item Suporte de biblioteca para estruturas de dados.
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+		
+		\subsection{Características do Paradigma}
+		
+		\begin{frame}{Características do Paradigma}
+			\begin{block}{Características}
+				\begin{itemize}
+					\item Expressões e atribuição;
+					\item {\color{gray} Estruturas de controle;
+					\item Entrada/saída; 
+					\item Manipulação de exceções e erros; 
+					\item Abstração procedural; 
+					\item Suporte de biblioteca para estruturas de dados.}
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+		
+		\begin{frame}{Expressões de Atribuição}
+			\begin{block}{Necessidades}
+				\begin{itemize}
+					\item Fundamental para todas as linguagens imperativas; \pause
+					\item Símbolos populares:
+					\begin{itemize}
+						\item Fortran ( = ) \pause
+						\item Algol ( := ).
+					\end{itemize} \pause
+					\item Semântica: \pause
+					\begin{itemize}
+						\item expressão avaliada para um valor;
+						\item valor copiado para o destino;
+						\item utiliza a semântica de cópia.
+					\end{itemize}
+				\end{itemize}
+			\end{block} \pause
+			\begin{alertblock}{Expressões}
+				Podem usar operadores lógicos e aritméticos, e/ou \\chamadas a funções-padrão da linguagem.
+			\end{alertblock}
+		\end{frame}
+	
+		\begin{frame}{Características do Paradigma}
+			\begin{block}{Características}
+				\begin{itemize}
+					\item {\color{gray} Expressões e atribuição;}
+					\item Estruturas de controle;
+						\item {\color{gray} Entrada/saída; 
+						\item Manipulação de exceções e erros; 
+						\item Abstração procedural; 
+						\item Suporte de biblioteca para estruturas de dados.}
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+		
+		\begin{frame}{Estruturas de controle}
+			\begin{block}{Sequência}
+					\begin{itemize}
+						\item Fluxo natural de execução; \pause
+						\item Comandos de desvios: \pause
+							\begin{itemize}
+								\item {\bf return}, \pause
+								\item {\bf break}, \pause
+								\item {\bf continue}, e \pause
+								\item {\bf go to}.
+							\end{itemize}
+					\end{itemize}
+			\end{block} \pause
+			\begin{block}{Condicional}
+				\begin{itemize}
+					\item Seleciona caminhos alternativos em execução; \pause
+					\item Comandos comuns: {\bf if} e {\bf case} (ou {\bf switch}).
+				\end{itemize}
+			\end{block}
+		\end{frame}
+		
+		\begin{frame}{Estruturas de controle}
+			\begin{block}{Laço}
+				\begin{itemize}
+					\item Duas variações: teste no início ou no fim; \pause
+					\item Em C, é chamado de {\bf while}; \pause
+					\item O comando {\bf for} é uma variação bastante utilizada; \pause
+					\item Comandos de desvios podem ser utilizados.
+				\end{itemize}
+			\end{block}
+		\end{frame}
+	
+		\begin{frame}{Características do Paradigma}
+			\begin{block}{Características}
+				\begin{itemize}
+					\item {\color{gray} Expressões e atribuição;
+					\item Estruturas de controle;}
+					\item Entrada/saída; 
+						\item {\color{gray} Manipulação de exceções e erros; 
+						\item Abstração procedural; 
+						\item Suporte de biblioteca para estruturas de dados.}
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+		
+		\begin{frame}{Entrada e Saída}
+			\begin{block}{Necessidades}
+				\begin{itemize}
+					\item Recuperação de dados de uma fonte; \pause
+					\item Armazenamento de dados em um destino; \pause
+					\item As fontes e os destinos são denominados arquivos: \pause
+					\begin{itemize}
+						\item Teclado; \pause
+						\item Monitor; \pause
+						\item Disco rígido; \pause
+						\item {\it Pen-drive}.
+					\end{itemize}
+				\end{itemize}
+			\end{block} \pause
+			\begin{alertblock}{Teclado como arquivo?}
+				Isto é irrelevante para o computador.
+			\end{alertblock}
+		\end{frame}
+	
+		\begin{frame}{Características do Paradigma}
+			\begin{block}{Características}
+				\begin{itemize}
+					\item {\color{gray} Expressões e atribuição;
+						\item Estruturas de controle;
+					\item Entrada/saída; }
+					\item Manipulação de exceções e erros; 
+						\item {\color{gray} Abstração procedural; 
+						\item Suporte de biblioteca para estruturas de dados.}
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+	
+		\begin{frame}{Manipulação de Exceções}
+			\begin{block}{Necessidades}
+				\begin{itemize}
+					\item Meio de lidar com erros inesperados: \pause
+						\begin{itemize}
+							\item Tempo de Execução; \pause
+							\item Entrada e saída; \pause
+							\item Acesso à memória, etc.
+						\end{itemize} \pause
+					\item Permite manipular erros ao invés de abortar a execução; \pause
+					\item Níveis de exceções: \pause
+					\begin{itemize}
+						\item Hardware (e.g. divisão por zero); \pause
+						\item Linguagem de Programação (e.g. índice fora do intervalo); \pause
+						\item Outros níveis (e.g. desempilhar pilha vazia).
+					\end{itemize}
+				\end{itemize}
+			\end{block} \pause
+			\begin{alertblock}{Garantia de robustez}
+				Uma aplicação é robusta quando ela continua a operar sob todas as situações de erro presumíveis.
+			\end{alertblock}
+		\end{frame}
+		
+		\begin{frame}{Características do Paradigma}
+			\begin{block}{Características}
+				\begin{itemize}
+					\item {\color{gray} Expressões e atribuição;
+						\item Estruturas de controle;
+						\item Entrada/saída; 
+					\item Manipulação de exceções e erros}; 
+					\item Abstração procedural; 
+						\item {\color{gray} Suporte de biblioteca para estruturas de dados.}
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+	
+		\begin{frame}{Abstração Procedural}
+			\begin{block}{Necessidades}
+				\begin{itemize}
+					\item Programador foca: \pause
+					\begin{itemize}
+						\item na interface da função; \pause
+						\item no seu valor de retorno.
+					\end{itemize} \pause
+					\item Refinamento de passos (Wirth, 1973): \pause
+					\begin{itemize}
+						\item sequenciamento;
+						\item iteração;
+						\item seleção.
+					\end{itemize}
+				\end{itemize}
+			\end{block} \pause
+			\begin{alertblock}{Exemplo: Algoritmo de Ordenação}
+				 Ignora detalhes sobre como essa ordenação é executada.
+			\end{alertblock}
+		\end{frame}
+		
+		\begin{frame}{Características do Paradigma}
+			\begin{block}{Características}
+				\begin{itemize}
+					\item {\color{gray} Expressões e atribuição;
+						\item Estruturas de controle;
+						\item Entrada/saída; 
+						\item Manipulação de exceções e erros; 
+					\item Abstração procedural;} 
+					\item Suporte de biblioteca para estruturas de dados.
+				\end{itemize}
+			\end{block} 
+		\end{frame}
+	
+		\begin{frame}{Suporte de biblioteca para ED}
+			\begin{block}{Necessidades}
+				\begin{itemize}
+					\item Vantagens das bibliotecas: \pause
+					\begin{itemize}
+						\item facilitam o desenvolvimento de aplicações complexas; \pause
+						\item ``inventam a roda''. 
+					\end{itemize} \pause
+					\item {\it Standard Template Library}: \pause
+					\begin{itemize}
+						\item manipulam estruturas de dados;
+						\item foi projetada para a programação imperativa;
+						\item é uma opção para os desenvolvedores.
+					\end{itemize}
+				\end{itemize}
+			\end{block}
+		\end{frame}
+	
+		\subsection{Potencialidades e Fragilidades}
+		
+		\begin{frame}{Potencialidades}
+			\begin{block}{Pontos fortes}
+				\begin{itemize}
+					\item Exigência de alto desempenho; \pause
+					\item Programação mais próxima ao nível de máquina; \pause
+					\begin{itemize}
+						\item e.g. C é tratada como linguagem de máquina universal. \pause
+					\end{itemize}
+					\item Restrições de memória ou potência. \pause
+					\begin{itemize}
+						\item e.g. programação em dispositivos móveis.
+					\end{itemize}
+				\end{itemize}
+			\end{block}
+		\end{frame}
+		
+		\begin{frame}{Fragilidades}
+			\begin{block}{Limitações da Decomposição Funcional}
+				\begin{itemize}
+					\item Muitas aplicações não são bem servidas neste paradigma; \pause
+					\item Programação de GUIs e dispositivos embarcados; \pause
+					\item Outra abordagem: troca de mensagens entre objetos; \pause
+					\item Programação de GUIs:
+					\begin{itemize}
+						\item  coleção de diferentes tipos de
+						objetos ? botões, áreas de texto, imagens, videoclipes e menus desdobráveis
+						?, cada um comunicando-se com o programa e com o usuário, mandando e
+						recebendo mensagens. \pause
+						\item ``inventam a roda''. 
+					\end{itemize} \pause
+					\item Diálogo entre os {\it stakeholders}.
+				\end{itemize}
+			\end{block}
+		\end{frame}
+	
+	\section{Próxima aula...}
+	
+	\begin{frame}{Próxima aula...}
+		\begin{block}{Paradigma Orientado a Objetos}
+			\begin{itemize}
+				\item Um breve histórico;
+				\item Características gerais;
+				\item Potencialidades e fragilidades.
+			\end{itemize}
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+\end{document}
